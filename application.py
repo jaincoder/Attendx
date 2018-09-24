@@ -8,6 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import os 
 import time
 import calendar
+import pygeoip
 from v0 import *
 from flask import send_file
 
@@ -47,8 +48,8 @@ def index():
 @login_required
 def ip(ip_address):  
     geo_data = geolocate.record_by_addr(ip_address)
-    output = jsonify(geo_data)
-    return render_template('index.html',output = output)
+    return jsonify(geo_data)
+    #return render_template('index.html',output = output)
 
 @app.route('/api/domain/<domain_name>')
 @login_required
