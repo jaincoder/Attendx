@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Admin
+{% endblock %}
+
+{% block main %}
+    {{test}}
+    <form action="/admin" method="post">
+        <button class="btn btn-primary" type="Get Attendance">Submit</button>
+    </form>
+    {{information}}
+    <script src = "../static/myScript.js"></script>
+{% endblock %}
