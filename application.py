@@ -1,5 +1,5 @@
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session#, jsonify
+from flask import Flask, flash, redirect, render_template, request, session
 from datetime import datetime, date
 from flask_session import Session
 from tempfile import mkdtemp
@@ -8,7 +8,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import os 
 import time
 import calendar
-#import pygeoip
 from v0 import *
 from flask import send_file
 
@@ -37,29 +36,8 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///elo.db")
 
-#geolocate = pygeoip.GeoIP('GeoIPCity.dat')
 
-@app.route('/')
 
-def index():  
-    return render_template("index.html")
-'''
-@app.route('/api/ip/<ip_address>')
-def ip(ip_address):  
-    geo_data = geolocate.record_by_addr(ip_address)
-    return jsonify(geo_data)
-    #return render_template('index.html',output = output)
-
-@app.route('/api/domain/<domain_name>')
-def domain(domain_name):  
-    geo_data = geolocate.record_by_name(domain_name)
-    return jsonify(geo_data)
-
-@app.errorhandler(500)
-def error_500(e):  
-    return jsonify({'error': 'Error finding location data for that address'})
-
-''' 
 @app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
