@@ -47,7 +47,8 @@ def index():
 @login_required
 def ip(ip_address):  
     geo_data = geolocate.record_by_addr(ip_address)
-    return jsonify(geo_data)
+    output = jsonify(geo_data)
+    return render_template('index.html',output = output)
 
 @app.route('/api/domain/<domain_name>')
 @login_required
