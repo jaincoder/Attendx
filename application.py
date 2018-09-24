@@ -1,5 +1,5 @@
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session, jsonify
 from datetime import datetime, date
 from flask_session import Session
 from tempfile import mkdtemp
@@ -36,6 +36,29 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///elo.db")
 
+geolocate = pygeoip.GeoIP('GeoIPCity.dat')
+
+@app.route('/')
+
+def index():  
+    return render_template("index.html")
+
+@app.route('/api/ip/<ip_address>')
+@login_required
+def ip(ip_address):  
+    geo_data = geolocate.record_by_addr(ip_address)
+    return jsonify(geo_data)
+
+@app.route('/api/domain/<domain_name>')
+@login_required
+def domain(domain_name):  
+    geo_data = geolocate.record_by_name(domain_name)
+    return jsonify(geo_data)
+
+@app.errorhandler(500)
+@login_required
+def error_500(e):  
+    return jsonify({'error': 'Error finding location data for that address'})
 
 
 @app.route("/", methods=["GET", "POST"])
