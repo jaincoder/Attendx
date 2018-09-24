@@ -5,7 +5,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions
 from werkzeug.security import check_password_hash, generate_password_hash
-import os, time, calendar, pygeoip
+import os, time, calendar
 from v0 import *
 from flask import send_file
 
