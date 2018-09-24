@@ -37,7 +37,7 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///elo.db")
 
-geolocate = pygeoip.GeoIP('GeoIPCity.dat')
+#geolocate = pygeoip.GeoIP('GeoIPCity.dat')
 
 @app.route('/')
 
