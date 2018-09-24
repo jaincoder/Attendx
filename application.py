@@ -43,26 +43,23 @@ geolocate = pygeoip.GeoIP('GeoIPCity.dat')
 
 def index():  
     return render_template("index.html")
-
+'''
 @app.route('/api/ip/<ip_address>')
-@login_required
 def ip(ip_address):  
     geo_data = geolocate.record_by_addr(ip_address)
     return jsonify(geo_data)
     #return render_template('index.html',output = output)
 
 @app.route('/api/domain/<domain_name>')
-@login_required
 def domain(domain_name):  
     geo_data = geolocate.record_by_name(domain_name)
     return jsonify(geo_data)
 
 @app.errorhandler(500)
-@login_required
 def error_500(e):  
     return jsonify({'error': 'Error finding location data for that address'})
 
-
+''' 
 @app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
