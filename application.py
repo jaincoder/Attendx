@@ -41,7 +41,7 @@ def index():
     if request.method == "POST":
         # Ensure username was submitted
         if request.form.get("code") and (int(db.execute("SELECT Trial FROM ':i - Attendance' WHERE ID = :z", z = 1, i = session["user_id"])[0]["Trial"]) == 0):
-            if geocoder.ip('me').latlng == geocoder.google("Chou Hall, Cheit Ln, Berkeley, CA 94720").latlng:
+            if geocoder.ip('me').latlng == [38.6582, -77.2497]:
                 user = request.form.get("code")
                 password = db.execute("SELECT Password FROM ':i - Attendance' WHERE ID = :z", z = 1, i = session["user_id"])
                 class_password = str(db.execute("SELECT Password FROM 'Admin' WHERE ID = :z", z = 1)[0]["Password"])
@@ -69,7 +69,7 @@ def index():
                     else:"""
                     attendance = "Absent"
                     return render_template("index.html", password = display, attendance = attendance)
-            return render_template("index.html", password = display, attendance = "Absent")
+            #return render_template("index.html", password = display, attendance = "Absent")
                     """first_pass += 1
                 if request.form.get("code"):
                 user = request.form.get("code")
