@@ -5,7 +5,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions
 from werkzeug.security import check_password_hash, generate_password_hash
-import os, time, calendar, json
+import os, time, calendar, json, geocoder
 from v0 import *
 
 from helpers import apology, login_required
