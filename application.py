@@ -33,7 +33,11 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///elo.db")
 
-
+#[39.0481, -77.4728] foothill building 8D (heroku)
+#[38.6582, -77.2497] foothill building 8D (replit)
+#[37.872204, -122.2545675] supposed chou hall address (heroku)
+#[37.872204, -122.2545675] supposed chou hall address (replit)
+# might try [round(geocoder.ip('me').latlng[0], 3), round(geocoder.ip('me').latlng[1], 3)]
 
 @app.route("/", methods=["GET", "POST"])
 @login_required
@@ -41,7 +45,7 @@ def index():
     if request.method == "POST":
         # Ensure username was submitted
         if request.form.get("code") and (int(db.execute("SELECT Trial FROM ':i - Attendance' WHERE ID = :z", z = 1, i = session["user_id"])[0]["Trial"]) == 0):
-            if True:#geocoder.ip('me').latlng == [38.6582, -77.2497]:
+            if geocoder.ip('me').latlng == [39.0481, -77.4728]:
                 user = request.form.get("code")
                 password = db.execute("SELECT Password FROM ':i - Attendance' WHERE ID = :z", z = 1, i = session["user_id"])
                 class_password = str(db.execute("SELECT Password FROM 'Admin' WHERE ID = :z", z = 1)[0]["Password"])
