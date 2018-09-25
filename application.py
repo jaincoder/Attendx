@@ -41,42 +41,44 @@ def index():
     if request.method == "POST":
         # Ensure username was submitted
         if request.form.get("code") and (int(db.execute("SELECT Trial FROM ':i - Attendance' WHERE ID = :z", z = 1, i = session["user_id"])[0]["Trial"]) == 0):
-            user = request.form.get("code")
-            password = db.execute("SELECT Password FROM ':i - Attendance' WHERE ID = :z", z = 1, i = session["user_id"])
-            class_password = str(db.execute("SELECT Password FROM 'Admin' WHERE ID = :z", z = 1)[0]["Password"])
-            time_started = db.execute("SELECT Time FROM ':i - Attendance' WHERE ID = :z", z = 1, i = session["user_id"])
-            time_sent = calendar.timegm(time.gmtime())
-            class_time = db.execute("SELECT Time FROM 'Admin' WHERE ID = :z", z = 1)[0]["Time"]
-            password = str(password[0]["Password"])
-            time_started = time_started[0]["Time"]
-            display = class_password + password
-            if check1(6, 10, user, display) == 1:
-                attendance = "Absent"
-                names = str(db.execute("SELECT Names FROM 'Admin' WHERE ID = :z", z = 1)[0]["Names"])
-                names += str(db.execute("SELECT Name FROM ':i - Attendance' WHERE ID = :z", z = 1, i = session["user_id"])[0]["Name"]) + "," + "\n"
-                db.execute("UPDATE 'Admin' SET Names = :n WHERE ID = :z", n = names, z = 1)
-                return render_template("index.html", password = display, attendance = attendance)
-            elif check1(6, 10, user, display) == 2:
-                if round(int(time_sent) - int(time_started)) < 10 and round(int(time_sent) - int(class_time)) < 20:
-                    attendance = "Present"
+            if geocoder.ip('me').latlng == geocoder.google("Chou Hall, Cheit Ln, Berkeley, CA 94720").latlng:
+                user = request.form.get("code")
+                password = db.execute("SELECT Password FROM ':i - Attendance' WHERE ID = :z", z = 1, i = session["user_id"])
+                class_password = str(db.execute("SELECT Password FROM 'Admin' WHERE ID = :z", z = 1)[0]["Password"])
+                time_started = db.execute("SELECT Time FROM ':i - Attendance' WHERE ID = :z", z = 1, i = session["user_id"])
+                time_sent = calendar.timegm(time.gmtime())
+                class_time = db.execute("SELECT Time FROM 'Admin' WHERE ID = :z", z = 1)[0]["Time"]
+                password = str(password[0]["Password"])
+                time_started = time_started[0]["Time"]
+                display = class_password + password
+                if check1(6, 10, user, display) == 1:
+                    attendance = "Absent"
+                    names = str(db.execute("SELECT Names FROM 'Admin' WHERE ID = :z", z = 1)[0]["Names"])
+                    names += str(db.execute("SELECT Name FROM ':i - Attendance' WHERE ID = :z", z = 1, i = session["user_id"])[0]["Name"]) + "," + "\n"
+                    db.execute("UPDATE 'Admin' SET Names = :n WHERE ID = :z", n = names, z = 1)
+                    return render_template("index.html", password = display, attendance = attendance)
+                elif check1(6, 10, user, display) == 2:
+                    if round(int(time_sent) - int(time_started)) < 10 and round(int(time_sent) - int(class_time)) < 20:
+                        attendance = "Present"
+                    else:
+                        attendance = "Absent"
+                    return render_template("index.html", password = display, attendance = attendance)
+                else:
+                    """if round(int(time_sent) - int(time_started)) < 10 and round(int(time_sent) - int(class_time)) < 20:
+                        attendance = "Keep Trying"
+                    else:"""
+                    attendance = "Absent"
+                    return render_template("index.html", password = display, attendance = attendance)
+            return render_template("index.html", password = display, attendance = "Absent")
+                    """first_pass += 1
+                if request.form.get("code"):
+                user = request.form.get("code")
+                if check2(6, 5, user, password):
+                    attendance = "Keep Trying"
+                    return render_template("index.html", password = password, attendance = attendance)
                 else:
                     attendance = "Absent"
-                return render_template("index.html", password = display, attendance = attendance)
-            else:
-                """if round(int(time_sent) - int(time_started)) < 10 and round(int(time_sent) - int(class_time)) < 20:
-                    attendance = "Keep Trying"
-                else:"""
-                attendance = "Absent"
-                return render_template("index.html", password = display, attendance = attendance)
-                """first_pass += 1
-            if request.form.get("code"):
-            user = request.form.get("code")
-            if check2(6, 5, user, password):
-                attendance = "Keep Trying"
-                return render_template("index.html", password = password, attendance = attendance)
-            else:
-                attendance = "Absent"
-                return render_template("index.html", password = password, attendance = attendance)
+                    return render_template("index.html", password = password, attendance = attendance)
         if first_pass == 3 and request.form.get("code"):
             user = request.form.get("code")
             if check3(6, 5, user, password):
