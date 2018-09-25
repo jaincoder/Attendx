@@ -62,7 +62,7 @@ def index():
                     db.execute("UPDATE 'Admin' SET Names = :n WHERE ID = :z", n = names, z = 1)
                     return render_template("index.html", password = display, attendance = attendance)
                 elif check1(6, 10, user, display) == 2:
-                    if round(int(time_sent) - int(time_started)) < 10 and round(int(time_sent) - int(class_time)) < 20:
+                    if round(int(time_sent) - int(time_started)) < 100 and round(int(time_sent) - int(class_time)) < 200:
                         attendance = "Present"
                     else:
                         attendance = "Absent"
