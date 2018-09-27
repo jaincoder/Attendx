@@ -6,13 +6,13 @@ window.onload = function(){
     	td = tr[i].getElementsByTagName("td")[0];
 	    if (td) {
 	      if (td.innerHTML == 1) {
-	        td.style.background = "#FFD700";
+	        td.style.background = "#FFFFFF";
 	      }
 	      if (td.innerHTML == 2) {
-	        td.style.background = "#C0C0C0";
+	        td.style.background = "#FFFFFF";
 	      }
 	      if (td.innerHTML == 3) {
-	        td.style.background = "#cd7f32";
+	        td.style.background = "#FFFFFF";
 	      }
 	    }
 	}
@@ -22,13 +22,13 @@ window.onload = function(){
     	td = tr[i].getElementsByTagName("td")[0];
 	    if (td) {
 	      if (td.innerHTML == 1) {
-	        td.style.background = "#FFD700";
+	        td.style.background = "#FFFFFF";
 	      }
 	      if (td.innerHTML == 2) {
-	        td.style.background = "#C0C0C0";
+	        td.style.background = "#FFFFFF";
 	      }
 	      if (td.innerHTML == 3) {
-	        td.style.background = "#cd7f32";
+	        td.style.background = "#FFFFFF";
 	      }
 	    }
 	}
@@ -38,13 +38,13 @@ window.onload = function(){
     	td = tr[i].getElementsByTagName("td")[0];
 	    if (td) {
 	      if (td.innerHTML == 1) {
-	        td.style.background = "#FFD700";
+	        td.style.background = "#FFFFFF";
 	      }
 	      if (td.innerHTML == 2) {
-	        td.style.background = "#C0C0C0";
+	        td.style.background = "#FFFFFF";
 	      }
 	      if (td.innerHTML == 3) {
-	        td.style.background = "#cd7f32";
+	        td.style.background = "#FFFFFF";
 	      }
 	    }
 	}
